@@ -1,8 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include <ctime>
-#include <cstdlib>
-#include <iostream>
 
 USING_NS_CC;
 
@@ -97,7 +95,7 @@ bool HelloWorld::init()
         
         // Generate happy face sprite
         auto spriteHappy = Sprite::create("happy_face.png");
-        spriteHappy->setPosition(Vec2(visibleSize.width/3 + rand() % 200, visibleSize.height/3 + rand() % 200));
+        spriteHappy->setPosition(Vec2(rand() % 300, rand() % 300));
         spriteHappy->setPhysicsBody(physicsBody);
         
         addChild(spriteHappy);
