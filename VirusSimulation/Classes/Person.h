@@ -65,17 +65,15 @@ public:
             health = 1;
             strain = 0;
         }
-        
+    }
+    
         //Full-control constructor
-        Person(int nat,int h, int s) {
-            natImmunity = nat;		//0-9
-            health = h;			//0-3
-            strain = s;			//0-4
-        }
-        
-        
-    };
-
+//        Person(int nat,int h, int s) {
+//            natImmunity = nat;		//0-9
+//            health = h;			//0-3
+//            strain = s;			//0-4
+//        }
+};
 
 #endif /* Person_h */
 

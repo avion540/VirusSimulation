@@ -10,6 +10,9 @@ private:
     PhysicsWorld *sceneWorld;
     void SetPhysicsWorld(PhysicsWorld *world) { sceneWorld = world; };
     
+    // Collision detection
+    bool onContactBegin(PhysicsContact &contact);
+    
     TMXTiledMap *_tileMap;      // Keep track of map
     TMXLayer *_background;      // Keep track of background layer in map
     Sprite *_player;            // Player sprite
