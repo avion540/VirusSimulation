@@ -52,6 +52,8 @@ bool HelloWorld::init()
     
     // Physics
     auto physicsBody = PhysicsBody::createBox(Size(20.0f, 20.0f), PhysicsMaterial(0, 1, 0));
+    physicsBody->setCollisionBitmask(0);
+    physicsBody->setContactTestBitmask(true);
     physicsBody->setDynamic(false);
     
     // Create a sprite
@@ -67,7 +69,8 @@ bool HelloWorld::init()
     for (int i = 0; i < 5; ++i)
     {
         physicsBody = PhysicsBody::createBox(Size(20.0f, 20.0f), PhysicsMaterial(0, 1, 0));
-        
+        physicsBody->setCollisionBitmask(i + 1);
+        physicsBody->setContactTestBitmask(true);
         // Set the body so it isn't affected by the physics world's gravitational force
         physicsBody->setGravityEnable(false);
         
