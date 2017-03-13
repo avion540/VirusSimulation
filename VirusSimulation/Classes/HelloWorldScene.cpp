@@ -1,10 +1,16 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
-#include <string>
-#include <chrono>
-using namespace std;
+#include <ctime>
+#include <cstdlib>
+#include <iostream>
 
 USING_NS_CC;
+
+// Random function. Returns random float from min to max
+static inline float rand_range(float min_num, float max_num) {
+    return min_num+(CCRANDOM_0_1()*(max_num-min_num));
+}
+
 
 Scene* HelloWorld::createScene()
 {
@@ -32,7 +38,9 @@ bool HelloWorld::init()
     if ( !Layer::init() ) {
         return false;
     }
-    
+    // Using current time as seed for random generator
+    srand(time(0));
+
     auto background = DrawNode::create();
     this->addChild(background);
     
@@ -40,6 +48,11 @@ bool HelloWorld::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
+    // Set-up random spawn locations for sprites
+    float randX = rand_range(0, visibleSize.width);
+    float randY = rand_range(0, visibleSize.height);
+    
+    // Set physics boundary
     auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PhysicsMaterial(0,1,0) );
     
     auto edgeNode = Node::create();
@@ -63,6 +76,11 @@ bool HelloWorld::init()
     // Apply physicsBody to the sprite
     sprite->setPhysicsBody(physicsBody);
     
+    // Collision detection
+    auto contactListener = EventListenerPhysicsContact::create();
+    contactListener->onContactBegin = CC_CALLBACK_1(HelloWorld::onContactBegin, this);
+    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
+    
     // Add five dynamic body
     for (int i = 0; i < 5; ++i)
     {
@@ -79,8 +97,7 @@ bool HelloWorld::init()
         
         // Generate happy face sprite
         auto spriteHappy = Sprite::create("happy_face.png");
-        spriteHappy->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-        //sprite->setPosition(Vec2(size.width/2, size.height/2));
+        spriteHappy->setPosition(Vec2(visibleSize.width/3 + rand() % 200, visibleSize.height/3 + rand() % 200));
         spriteHappy->setPhysicsBody(physicsBody);
         
         addChild(spriteHappy);
@@ -94,9 +111,7 @@ bool HelloWorld::init()
     audio->preloadBackgroundMusic("TownTheme.mp3");
     audio->playBackgroundMusic("TownTheme.mp3");
     
-    auto contactListener = EventListenerPhysicsContact::create();
-    contactListener->onContactBegin = CC_CALLBACK_1(HelloWorld::onContactBegin, this);
-    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
+
     
     return true;
 }
