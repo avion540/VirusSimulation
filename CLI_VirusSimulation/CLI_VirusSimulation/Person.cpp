@@ -12,7 +12,7 @@
 #include <cmath>
 #include <cstdlib>
 #include "Person.h"
-#include "Ambulance.h"
+//#include "Ambulance.h"
 using namespace std;
 
 //Default constructor
@@ -32,6 +32,7 @@ Person::Person() {
 
 //Constructor given health probablility
 Person::Person(double prob) {		//prob entered as 0-100; likelihood of disease at startup
+    natImmunity = rand() % 10;
     
     if(rand() % 101 <= prob)	//rand produces 0-100
     {
@@ -46,6 +47,7 @@ Person::Person(double prob) {		//prob entered as 0-100; likelihood of disease at
 
 //Constructor given probability and a strain intensity
 Person::Person(double prob, int intensity) {		//prob entered as 0-100; likelihood of disease at startup
+    natImmunity = rand() % 10;
     
     if(rand() % 101 <= prob)	//rand produces 0-100
     {
@@ -65,4 +67,8 @@ Person::Person(int nat,int h, int s) {
     strain = s;			//0-4
 }
 
+//Disease transfer check
+void Person::iterate(int popSize) {
+    
+}
 

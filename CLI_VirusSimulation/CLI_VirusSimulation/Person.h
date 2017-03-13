@@ -24,6 +24,10 @@ public:
     int natImmunity;
     int health;
     int strain;
+    bool dead = 0;
+    
+    //Deconstructor
+    ~Person();
     
     //Default constructor
     Person();
@@ -37,7 +41,10 @@ public:
     
     //Full-control constructor
     Person(int nat,int h, int s);
+    
+    void iterate(int popSize);
 };
+
 
 #endif /* Person_h */
 

@@ -5,8 +5,8 @@
  *      Author: nicholas.zimmerman
  */
 
-#ifndef AMBULANCE_H_
-#define AMBULANCE_H_
+#ifndef DOCTOR_H_
+#define DOCTOR_H_
 
 #include <iostream>
 #include <string>
@@ -15,11 +15,15 @@
 #include <cstdlib>
 using namespace std;
 
-class Ambulance
+class Doctor
 {
 public:
+	bool isHealed;
+	bool isAlive;
+
+	Doctor(double prob, int intensity);
 
 };
 
 
-#endif /* AMBULANCE_H_ */
+#endif /* DOCTOR_H_ */
