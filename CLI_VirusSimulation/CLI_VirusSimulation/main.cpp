@@ -12,8 +12,8 @@
 #include <cstdlib>
 #include <thread>
 #include <chrono>
-//#include "Person.h"
-//#include "Ambulance.h"
+#include "Person.h"
+#include "Ambulance.h"
 using namespace std;
 using namespace this_thread;
 using namespace chrono;
@@ -58,48 +58,26 @@ int main()
     double duration;
     start = clock();
     
-    vector<int> infectedVec;
-    vector<int> ambulanceVec;
+    vector<Person> population;
 
 	while (run == true)
 	{
 		// Your algorithm here
 		for (int i = 0; i < userNumPeople; i++)
 		{
-			int r1 = rand() % 100+1;
-			if (r1 > 80)	// 20% chance
-			{
-				// Move person to infected array
-				// copy[i] to infected array
-		        // (Do we even need to do this step? Why do we need arrays in
-		        // addition to the infected variable?)
-		        infectedVec.push_back(1);
-		        infected++;
-		        cout << "1 person was infected" << endl;
-		        //sleep_for(10ns);
-                
-                int r2 = rand() % 100+1;
-                if (r2 > 90)	// 10% chance
-                {
-                    // Move infected to ambulance
-                    ambulanceVec.push_back(1);
-                    int r3 = rand() % 100;
-                    if (r3 > 50)
-                    {
-                        ambulanceVec.clear();
-                        numPeople.push_back(1);    // Add 1
-                        cout << "Someone was saved by the abulance." << endl;
-                        saved++;
-                    }
-                }
-				continue;		// Move to top of while loop
-			}
-
+        
+            Person p;
+            population.push_back(p);
+            
+            cout << population[i].natImmunity << endl;
+            cout << population[i].health << endl;
+            cout << population[i].strain << endl << endl;;
+            
 			if (infected == userNumPeople)
 			{
 				run = false;
 			}
-            cout << "No one was infected or saved by the ambulance." << endl;
+            run = false;
 		}
 	}
 
